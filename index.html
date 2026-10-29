@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mangleate | Voluntariado de Conservación de Manglares - Cartagena</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        emerald: {
+                            750: '#046c4e',
+                            850: '#054232',
+                            900: '#064e3b',
+                            950: '#022c22',
+                        },
+                        mint: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            500: '#10b981',
+                            600: '#059669',
+                        },
+                        sand: {
+                            50: '#fbf9f5',
+                            100: '#f5f0e6',
+                            200: '#e8dcce',
+                        }
+                    },
+                    fontFamily: {
+                        display: ['Archivo Black', 'sans-serif'],
+                        sans: ['League Spartan', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts: Archivo Black & League Spartan -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=League+Spartan:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .hero-bg {
+            /* PORTADA CON LINK EN ALTA RESOLUCIÓN */
+            background-image: linear-gradient(rgba(2, 44, 34, 0.8), rgba(6, 78, 59, 0.9)), url('https://i.postimg.cc/gJ6q147F/bf13585b-13f2-4156-8b49-ca277ab260ee.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+        .pattern-bg {
+            background-color: #fbf9f5;
+            background-image: radial-gradient(#064e3b 0.5px, transparent 0.5px), radial-gradient(#064e3b 0.5px, #fbf9f5 0.5px);
+            background-size: 20px 20px;
+            background-position: 0 0, 10px 10px;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="bg-sand-50 text-slate-800 font-sans antialiased selection:bg-mint-500 selection:text-emerald-950">
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-32 opacity-0 transition-all duration-300 bg-emerald-950 text-sand-100 px-6 py-4 rounded-xl shadow-2xl border border-mint-500/30 flex items-center space-x-3">
+        <i data-lucide="check-circle" class="text-mint-500 w-6 h-6"></i>
+        <div>
+            <h4 class="font-display text-mint-400" id="toast-title">¡Mensaje enviado!</h4>
+            <p class="text-sm font-medium text-sand-200" id="toast-desc">Nos pondremos en contacto contigo pronto.</p>
+        </div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <header id="navbar" class="fixed top-0 left-0 right-0 z-40 transition-all duration-300 bg-emerald-950/90 backdrop-blur-md border-b border-white/10 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Logo con la imagen correcta -->
+            <a href="#" class="flex items-center space-x-3">
+                <div class="w-11 h-11 rounded-full bg-mint-500 overflow-hidden flex items-center justify-center shadow-lg border-2 border-mint-400/50 flex-shrink-0">
+                    <img src="https://i.postimg.cc/gJ6q147F/bf13585b-13f2-4156-8b49-ca277ab260ee.jpg" alt="Logo Mangléate" class="w-full h-full object-cover">
+                </div>
+                <div>
+                    <span class="font-display text-xl sm:text-2xl tracking-wider text-sand-100">MANGLÉATE</span>
+                    <span class="block text-[11px] tracking-widest text-mint-400 uppercase font-semibold">Voluntariado Ambiental • Cartagena</span>
+                </div>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden md:flex items-center space-x-8 text-base font-semibold tracking-wide">
+                <a href="#inicio" class="hover:text-mint-400 transition-colors">Inicio</a>
+                <a href="#quienes-somos" class="hover:text-mint-400 transition-colors">¿Quiénes Somos?</a>
+                <a href="#que-hacemos" class="hover:text-mint-400 transition-colors">¿Qué Hacemos?</a>
+                <a href="#actividades" class="hover:text-mint-400 transition-colors">Encuentros</a>
+                <a href="#galeria" class="hover:text-mint-400 transition-colors">Galería</a>
+                <a href="#contacto" class="hover:text-mint-400 transition-colors">Contacto</a>
+            </nav>
+
+            <!-- Social / CTA -->
+            <div class="hidden md:flex items-center space-x-3">
+                <a href="https://www.instagram.com/mangleate" target="_blank" class="bg-emerald-850 hover:bg-emerald-900 border border-mint-500/40 text-sand-100 text-sm font-bold px-4 py-2.5 rounded-full shadow transition-all flex items-center space-x-2">
+                    <i data-lucide="instagram" class="w-4 h-4 text-mint-400"></i>
+                    <span>@mangleate</span>
+                </a>
+                <a href="#contacto" class="bg-mint-500 hover:bg-mint-600 text-emerald-950 font-bold px-5 py-2.5 rounded-full shadow-lg transition-all transform hover:scale-105 flex items-center space-x-2 text-sm">
+                    <i data-lucide="heart" class="w-4 h-4"></i>
+                    <span>Únete</span>
+                </a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="md:hidden text-sand-100 focus:outline-none p-2">
+                <i data-lucide="menu" class="w-7 h-7"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-emerald-950 border-t border-emerald-900 px-6 py-6 space-y-4 shadow-xl">
+            <a href="#inicio" onclick="closeMobileMenu()" class="block text-sand-100 hover:text-mint-400 font-semibold text-lg">Inicio</a>
+            <a href="#quienes-somos" onclick="closeMobileMenu()" class="block text-sand-100 hover:text-mint-400 font-semibold text-lg">¿Quiénes Somos?</a>
+            <a href="#que-hacemos" onclick="closeMobileMenu()" class="block text-sand-100 hover:text-mint-400 font-semibold text-lg">¿Qué Hacemos?</a>
+            <a href="#actividades" onclick="closeMobileMenu()" class="block text-sand-100 hover:text-mint-400 font-semibold text-lg">Encuentros</a>
+            <a href="#galeria" onclick="closeMobileMenu()" class="block text-sand-100 hover:text-mint-400 font-semibold text-lg">Galería</a>
+            <a href="#contacto" onclick="closeMobileMenu()" class="block text-sand-100 hover:text-mint-400 font-semibold text-lg">Contacto</a>
+            <div class="pt-4 space-y-3">
+                <a href="https://www.instagram.com/mangleate" target="_blank" class="w-full bg-emerald-850 border border-mint-500/40 text-sand-100 font-bold py-3 rounded-xl text-center text-sm flex items-center justify-center space-x-2">
+                    <i data-lucide="instagram" class="w-4 h-4 text-mint-400"></i>
+                    <span>Instagram @mangleate</span>
+                </a>
+                <a href="#contacto" onclick="closeMobileMenu()" class="w-full bg-mint-500 text-emerald-950 font-bold py-3.5 rounded-full text-center block text-sm shadow-md">
+                    Únete al Voluntariado
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="hero-bg min-h-screen flex items-center justify-center text-center px-4 pt-20 relative">
+        <div class="max-w-4xl mx-auto space-y-8 z-10 text-white">
+            <div class="inline-flex items-center space-x-2 bg-emerald-900/80 border border-mint-500/40 px-4 py-1.5 rounded-full backdrop-blur-md">
+                <i data-lucide="shield-check" class="w-4 h-4 text-mint-400"></i>
+                <span class="text-sm tracking-widest uppercase font-bold text-sand-100">Acción Juvenil • Villa Gloria, Cartagena</span>
+            </div>
+            
+            <h1 class="font-display text-4xl sm:text-6xl lg:text-7xl tracking-tight text-sand-50 leading-[1.1]">
+                GESTIÓN COMUNITARIA DE RESIDUOS Y REVALORIZACIÓN AMBIENTAL <span class="block text-mint-400 text-3xl sm:text-5xl mt-3">EN VILLA GLORIA Y LA BOQUILLA</span>
+            </h1>
+            <p class="text-lg sm:text-2xl text-sand-100/90 font-medium max-w-2xl mx-auto leading-relaxed">
+                Somos <strong class="text-mint-400 font-bold">Mangléate</strong>, la unión entre la acción juvenil y la comunidad para transformar desechos en valor y construir soberanía ambiental.
+            </p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+                <a href="#quienes-somos" class="w-full sm:w-auto bg-mint-500 hover:bg-mint-600 text-emerald-950 font-bold px-8 py-4 rounded-full shadow-2xl transition-all transform hover:-translate-y-0.5 flex items-center justify-center space-x-2 text-lg">
+                    <i data-lucide="compass" class="w-5 h-5"></i>
+                    <span>Conoce Nuestra Labor</span>
+                </a>
+                <a href="https://www.instagram.com/mangleate" target="_blank" class="w-full sm:w-auto bg-white/10 hover:bg-white/20 border border-white/30 text-sand-100 font-bold px-8 py-4 rounded-full backdrop-blur-md transition-all flex items-center justify-center space-x-2 text-lg">
+                    <i data-lucide="instagram" class="w-5 h-5 text-mint-400"></i>
+                    <span>Síguenos @mangleate</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ¿Quiénes Somos? Section -->
+    <section id="quienes-somos" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6">
+                    <div class="inline-flex items-center space-x-2 bg-mint-50 text-emerald-850 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider border border-mint-500/20">
+                        <span>¿Quiénes Somos?</span>
+                    </div>
+                    <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl text-emerald-950 leading-tight">
+                        ¿QUÉ ES MANGLÉATE?
+                    </h2>
+                    <p class="text-slate-600 text-lg font-medium leading-relaxed">
+                        <strong>Mangléate</strong> es una iniciativa de voluntariado juvenil nacida del proyecto <strong>S2cities</strong> y la <strong>Fundación Mi Sangre</strong>, e impulsada por <strong>Es Tu City</strong>. Está centrada en la gestión comunitaria de residuos sólidos y la revalorización ambiental en <strong>Villa Gloria (Cartagena)</strong>, una comunidad rural ubicada en la franja costera entre el mar Caribe y los cuerpos de agua.
+                    </p>
+                    <p class="text-slate-600 text-base font-medium leading-relaxed">
+                        Nace para dar respuesta directa a la problemática principal de la zona: la falta de una gestión adecuada de residuos. A través de la educación ambiental y la acción colectiva, demostramos que los desechos pueden convertirse en el motor de una economía circular.
+                    </p>
+                    <div class="bg-sand-50 p-6 rounded-2xl border-l-4 border-mint-500 shadow-sm">
+                        <p class="font-semibold text-slate-700 italic text-sm sm:text-base leading-relaxed">
+                            "Mangléate es la unión entre la acción juvenil, el respaldo de S2cities y Fundación Mi Sangre, y el poder de la comunidad para sanar el territorio, demostrar que los residuos tienen valor y construir soberanía ambiental desde Villa Gloria."
+                        </p>
+                    </div>
+                </div>
+                <div class="relative">
+                    <div class="aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl border-4 border-sand-100">
+                        <img src="https://i.postimg.cc/fR7Mwh6B/10330f94-4c29-41ea-8cf1-e01540f8e326.jpg" alt="Voluntariado Mangleate" class="w-full h-full object-cover">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ¿Qué Hacemos? Section -->
+    <section id="que-hacemos" class="py-24 pattern-bg border-t border-sand-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+                <span class="text-emerald-850 font-bold text-sm tracking-widest uppercase">Ejes de Acción</span>
+                <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl text-emerald-950">
+                    ¿QUÉ HACEMOS?
+                </h2>
+                <div class="w-24 h-1 bg-mint-500 mx-auto rounded-full"></div>
+                <p class="text-slate-600 text-lg font-medium">
+                    Nuestras líneas de trabajo transforman los desafíos ambientales en oportunidades de desarrollo comunitario e innovación sostenible.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Card 1 -->
+                <div class="bg-white p-8 rounded-2xl border border-sand-200 shadow-sm hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 rounded-xl bg-mint-500/10 text-mint-600 flex items-center justify-center mb-6">
+                        <i data-lucide="recycle" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="font-display text-xl text-emerald-950 mb-3">Economía Circular</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        Capacitamos a la comunidad para darle una segunda vida a los materiales, transformando residuos sólidos en recursos útiles y generando oportunidades de emprendimiento local.
+                    </p>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-white p-8 rounded-2xl border border-sand-200 shadow-sm hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 rounded-xl bg-mint-500/10 text-mint-600 flex items-center justify-center mb-6">
+                        <i data-lucide="box" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="font-display text-xl text-emerald-950 mb-3">Pacas Digestoras</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        Instalamos este sistema para el manejo ecológico de residuos orgánicos, transformándolos en abono fértil que beneficia a la comunidad y combate la acumulación de desechos.
+                    </p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-white p-8 rounded-2xl border border-sand-200 shadow-sm hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 rounded-xl bg-mint-500/10 text-mint-600 flex items-center justify-center mb-6">
+                        <i data-lucide="map" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="font-display text-xl text-emerald-950 mb-3">Ruta Biocultural</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        Diseñamos y recorremos rutas bioculturales a través de la Ciénaga Juan Polo y la Ciénaga de la Virgen, conectando el ecoturismo con el reconocimiento y la protección del entorno natural.
+                    </p>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="bg-white p-8 rounded-2xl border border-sand-200 shadow-sm hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 rounded-xl bg-mint-500/10 text-mint-600 flex items-center justify-center mb-6">
+                        <i data-lucide="trees" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="font-display text-xl text-emerald-950 mb-3">Conservación de Manglares</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        Promovemos el cuidado y la restauración del ecosistema de manglar local, vital para la protección costera, el combate a la erosión y el refugio de biodiversidad.
+                    </p>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="bg-white p-8 rounded-2xl border border-sand-200 shadow-sm hover:shadow-md transition-shadow md:col-span-2 lg:col-span-2">
+                    <div class="w-12 h-12 rounded-xl bg-mint-500/10 text-mint-600 flex items-center justify-center mb-6">
+                        <i data-lucide="users" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="font-display text-xl text-emerald-950 mb-3">Educación y Tejido Comunitario</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        Fomentamos talleres participativos e intergeneracionales que involucran activamente a jóvenes, madres, líderes y habitantes locales como verdaderos protagonistas del cambio ambiental en su territorio.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Actividades y Bitácora -->
+    <section id="actividades" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+                <span class="text-emerald-850 font-bold text-sm tracking-widest uppercase">Bitácora en Campo</span>
+                <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl text-emerald-950">
+                    ENCUENTROS Y REGISTRO DE ACCIONES
+                </h2>
+                <div class="w-24 h-1 bg-mint-500 mx-auto rounded-full"></div>
+                <p class="text-slate-600 text-lg font-medium">
+                    Explora nuestras jornadas de limpieza, educación, conservación y los resultados de nuestro trabajo junto a la comunidad.
+                </p>
+            </div>
+
+            <!-- Grid de 8 Encuentros -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                
+                <!-- 01 SOCIALIZACIÓN -->
+                <div class="bg-sand-50 rounded-2xl overflow-hidden border border-sand-200 shadow-sm flex flex-col group">
+                    <div class="h-48 overflow-hidden relative">
+                        <img src="https://i.postimg.cc/5XgbnwMT/1bec2d3b-acea-4a10-a7e2-7fa48ba8f6f0.jpg" alt="Socialización" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                        <div class="absolute top-3 left-3 bg-emerald-950 text-mint-400 text-xs font-display px-3 py-1 rounded-full shadow-sm">
+                            01
+                        </div>
+                    </div>
+                    <div class="p-5 flex flex-col flex-grow space-y-3">
+                        <div class="flex-grow">
+                            <h3 class="font-display text-lg text-emerald-950 mb-2 leading-tight">SOCIALIZACIÓN</h3>
+                            <p class="text-sm font-medium text-slate-500 leading-relaxed">
+                                Primer acercamiento y presentación de nuestros objetivos con la comunidad.
+                            </p>
+                        </div>
+                        <a href="https://www.instagram.com/mangleate" target="_blank" class="inline-flex items-center justify-center space-x-2 w-full bg-mint-50 hover:bg-mint-100 text-emerald-900 font-bold py-2.5 rounded-xl transition-colors text-sm border border-mint-500/20">
+                            <i data-lucide="instagram" class="w-4 h-4"></i>
+                            <span>Ver en Instagram</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 02 BIENVENIDA Y DIAGNÓSTICO -->
+                <div class="bg-sand-50 rounded-2xl overflow-hidden border border-sand-200 shadow-sm flex flex-col group">
+                    <div class="h-48 overflow-hidden relative">
+                        <img src="https://i.postimg.cc/5Xd6Z5GP/1ee39ff4-2c44-4a94-b169-8f48e2fa3e18.jpg" alt="Bienvenida y Diagnóstico" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                        <div class="absolute top-3 left-3 bg-emerald-950 text-mint-400 text-xs font-display px-3 py-1 rounded-full shadow-sm">
+                            02
+                        </div>
+                    </div>
+                    <div class="p-5 flex flex-col flex-grow space-y-3">
+                        <div class="flex-grow">
+                            <h3 class="font-display text-lg text-emerald-950 mb-2 leading-tight">BIENVENIDA Y DIAGNÓSTICO</h3>
+                            <p class="text-sm font-medium text-slate-500 leading-relaxed">
+                                Reconocimiento del territorio y evaluación inicial del estado del ecosistema.
+                            </p>
+                        </div>
+                        <a href="https://www.instagram.com/mangleate" target="_blank" class="inline-flex items-center justify-center space-x-2 w-full bg-mint-50 hover:bg-mint-100 text-emerald-900 font-bold py-2.5 rounded-xl transition-colors text-sm border border-mint-500/20">
+                            <i data-lucide="instagram" class="w-4 h-4"></i>
+                            <span>Ver en Instagram</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 03 SEPARACIÓN Y PACAS DIGESTORAS -->
+                <div class="bg-sand-50 rounded-2xl overflow-hidden border border-sand-200 shadow-sm flex flex-col group">
+                    <div class="h-48 overflow-hidden relative">
+                        <img src="https://i.postimg.cc/JsxMPbWN/ed9a7485-8d5a-45a5-aa3e-70a2aac0ef02.jpg" alt="Separación y Pacas Digestoras" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                        <div class="absolute top-3 left-3 bg-emerald-950 text-mint-400 text-xs font-display px-3 py-1 rounded-full shadow-sm">
+                            03
+                        </div>
+                    </div>
+                    <div class="p-5 flex flex-col flex-grow space-y-3">
+                        <div class="flex-grow">
+                            <h3 class="font-display text-lg text-emerald-950 mb-2 leading-tight">SEPARACIÓN Y PACAS</h3>
+                            <p class="text-sm font-medium text-slate-500 leading-relaxed">
+                                Taller práctico comunitario de manejo responsable de residuos orgánicos.
+                            </p>
+                        </div>
+                        <a href="https://www.instagram.com/mangleate" target="_blank" class="inline-flex items-center justify-center space-x-2 w-full bg-mint-50 hover:bg-mint-100 text-emerald-900 font-bold py-2.5 rounded-xl transition-colors text-sm border border-mint-500/20">
+                            <i data-lucide="instagram" class="w-4 h-4"></i>
+                            <span>Ver en Instagram</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 04 TAKE OVER -->
+                <div class="bg-sand-50 rounded-2xl overflow-hidden border border-sand-200 shadow-sm flex flex-col group">
+                    <div class="h-48 overflow-hidden relative">
+                        <img src="https://i.postimg.cc/w7s1f4Wr/67c09657-aa89-49e0-a5d1-64ad708d7425.jpg" alt="Take Over" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                        <div class="absolute top-3 left-3 bg-emerald-950 text-mint-400 text-xs font-display px-3 py-1 rounded-full shadow-sm">
+                            04
+                        </div>
+                    </div>
+                    <div class="p-5 flex flex-col flex-grow space-y-3">
+                        <div class="flex-grow">
+                            <h3 class="font-display text-lg text-emerald-950 mb-2 leading-tight">TAKE OVER</h3>
+                            <p class="text-sm font-medium text-slate-500 leading-relaxed">
+                                Toma de acción directa, limpieza profunda y revitalización del espacio.
+                            </p>
+                        </div>
+                        <a href="https://www.instagram.com/mangleate" target="_blank" class="inline-flex items-center justify-center space-x-2 w-full bg-mint-50 hover:bg-mint-100 text-emerald-900 font-bold py-2.5 rounded-xl transition-colors text-sm border border-mint-500/20">
+                            <i data-lucide="instagram" class="w-4 h-4"></i>
+                            <span>Ver en Instagram</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 05 CREACIÓN DE ARTESANÍAS -->
+                <div class="bg-sand-50 rounded-2xl overflow-hidden border border-sand-200 shadow-sm flex flex-col group">
+                    <div class="h-48 overflow-hidden relative">
+                        <img src="https://i.postimg.cc/xcbXxps4/7c2a56e9-601d-49ce-ae59-61f0f83e20a4.jpg" alt="Creación de Artesanías" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                        <div class="absolute top-3 left-3 bg-emerald-950 text-mint-400 text-xs font-display px-3 py-1 rounded-full shadow-sm">
+                            05
+                        </div>
+                    </div>
+                    <div class="p-5 flex flex-col flex-grow space-y-3">
+                        <div class="flex-grow">
+                            <h3 class="font-display text-lg text-emerald-950 mb-2 leading-tight">CREACIÓN DE ARTESANÍAS</h3>
+                            <p class="text-sm font-medium text-slate-500 leading-relaxed">
+                                Jornada de creación sostenible utilizando materiales y saberes locales.
+                            </p>
+                        </div>
+                        <a href="https://www.instagram.com/mangleate" target="_blank" class="inline-flex items-center justify-center space-x-2 w-full bg-mint-50 hover:bg-mint-100 text-emerald-900 font-bold py-2.5 rounded-xl transition-colors text-sm border border-mint-500/20">
+                            <i data-lucide="instagram" class="w-4 h-4"></i>
+                            <span>Ver en Instagram</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 06 PILOTAJE DE RUTA BIOCULTURAL -->
+                <div class="bg-sand-50 rounded-2xl overflow-hidden border border-sand-200 shadow-sm flex flex-col group">
+                    <div class="h-48 overflow-hidden relative">
+                        <img src="https://i.postimg.cc/v4hb3Wdt/928c2111-c49b-4cc9-b6f1-4884ae26f9d7.jpg" alt="Pilotaje de Ruta Biocultural" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                        <div class="absolute top-3 left-3 bg-emerald-950 text-mint-400 text-xs font-display px-3 py-1 rounded-full shadow-sm">
+                            06
+                        </div>
+                    </div>
+                    <div class="p-5 flex flex-col flex-grow space-y-3">
+                        <div class="flex-grow">
+                            <h3 class="font-display text-lg text-emerald-950 mb-2 leading-tight">PILOTAJE BIOCULTURAL</h3>
+                            <p class="text-sm font-medium text-slate-500 leading-relaxed">
+                                Exploración vivencial de los saberes y la vasta biodiversidad del manglar.
+                            </p>
+                        </div>
+                        <a href="https://www.instagram.com/mangleate" target="_blank" class="inline-flex items-center justify-center space-x-2 w-full bg-mint-50 hover:bg-mint-100 text-emerald-900 font-bold py-2.5 rounded-xl transition-colors text-sm border border-mint-500/20">
+                            <i data-lucide="instagram" class="w-4 h-4"></i>
+                            <span>Ver en Instagram</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 07 SEGUNDA VIDA AL VIDRIO -->
+                <div class="bg-sand-50 rounded-2xl overflow-hidden border border-sand-200 shadow-sm flex flex-col group">
+                    <div class="h-48 overflow-hidden relative">
+                        <img src="https://i.postimg.cc/qNw4j8dX/1d57ee4f-443f-45ea-bd06-18f35acef70b.jpg" alt="Segunda Vida al Vidrio" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                        <div class="absolute top-3 left-3 bg-emerald-950 text-mint-400 text-xs font-display px-3 py-1 rounded-full shadow-sm">
+                            07
+                        </div>
+                    </div>
+                    <div class="p-5 flex flex-col flex-grow space-y-3">
+                        <div class="flex-grow">
+                            <h3 class="font-display text-lg text-emerald-950 mb-2 leading-tight">SEGUNDA VIDA AL VIDRIO</h3>
+                            <p class="text-sm font-medium text-slate-500 leading-relaxed">
+                                Estrategias de reciclaje, acopio y reutilización de botellas y envases.
+                            </p>
+                        </div>
+                        <a href="https://www.instagram.com/mangleate" target="_blank" class="inline-flex items-center justify-center space-x-2 w-full bg-mint-50 hover:bg-mint-100 text-emerald-900 font-bold py-2.5 rounded-xl transition-colors text-sm border border-mint-500/20">
+                            <i data-lucide="instagram" class="w-4 h-4"></i>
+                            <span>Ver en Instagram</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 08 MESA DE TURISMO -->
+                <div class="bg-sand-50 rounded-2xl overflow-hidden border border-sand-200 shadow-sm flex flex-col group">
+                    <div class="h-48 overflow-hidden relative">
+                        <img src="https://i.postimg.cc/HrDVf0Kq/b46cb161-df8f-4e26-a1fa-255f473730e0.jpg" alt="Mesa de Turismo" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                        <div class="absolute top-3 left-3 bg-emerald-950 text-mint-400 text-xs font-display px-3 py-1 rounded-full shadow-sm">
+                            08
+                        </div>
+                    </div>
+                    <div class="p-5 flex flex-col flex-grow space-y-3">
+                        <div class="flex-grow">
+                            <h3 class="font-display text-lg text-emerald-950 mb-2 leading-tight">MESA DE TURISMO</h3>
+                            <p class="text-sm font-medium text-slate-500 leading-relaxed">
+                                Diálogo comunitario para fomentar un turismo más consciente y ecológico.
+                            </p>
+                        </div>
+                        <a href="https://www.instagram.com/mangleate" target="_blank" class="inline-flex items-center justify-center space-x-2 w-full bg-mint-50 hover:bg-mint-100 text-emerald-900 font-bold py-2.5 rounded-xl transition-colors text-sm border border-mint-500/20">
+                            <i data-lucide="instagram" class="w-4 h-4"></i>
+                            <span>Ver en Instagram</span>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Galería / Muestra Section -->
+    <section id="galeria" class="py-24 pattern-bg border-t border-sand-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+                <span class="text-emerald-850 font-bold text-sm tracking-widest uppercase">Muestra Visual</span>
+                <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl text-emerald-950">
+                    NUESTRO IMPACTO EN IMÁGENES
+                </h2>
+                <div class="w-24 h-1 bg-mint-500 mx-auto rounded-full"></div>
+                <p class="text-slate-600 text-lg font-medium">
+                    Un vistazo a la energía, el trabajo en equipo y el amor por la naturaleza de nuestra comunidad de voluntarios.
+                </p>
+            </div>
+
+            <!-- Grid Panorámico 16:9 (aspect-video) en Alta Resolución 1080p -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
+                <div class="aspect-video rounded-2xl overflow-hidden shadow-md group">
+                    <img src="https://i.postimg.cc/LJD2NzMk/f9dc208e-07b1-4948-9f05-335dcfb13ecb.jpg" alt="Muestra Mangleate 1" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                </div>
+                <div class="aspect-video rounded-2xl overflow-hidden shadow-md group">
+                    <img src="https://i.postimg.cc/xX5ntKSs/423f7b44-30d5-4640-ba36-ed0975ed4da8.jpg" alt="Muestra Mangleate 2" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                </div>
+                <div class="aspect-video rounded-2xl overflow-hidden shadow-md group">
+                    <img src="https://i.postimg.cc/21RVPdJX/8408f431-ff43-43ff-8323-4aa27e6cbf4c.jpg" alt="Muestra Mangleate 3" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                </div>
+                <div class="aspect-video rounded-2xl overflow-hidden shadow-md group">
+                    <img src="https://i.postimg.cc/zyZV9wM9/bc684cef-5c35-4c99-a9bb-47989c5d3c2b.jpg" alt="Muestra Mangleate 4" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                </div>
+                <div class="aspect-video rounded-2xl overflow-hidden shadow-md group">
+                    <img src="https://i.postimg.cc/N5rKJCNV/9322e8a9-012d-4c40-b796-a60af5d4ccbd.jpg" alt="Muestra Mangleate 5" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                </div>
+                <div class="aspect-video rounded-2xl overflow-hidden shadow-md group">
+                    <img src="https://i.postimg.cc/KcTDfZCk/3b025793-c0ff-4872-882c-82a763299dec.jpg" alt="Muestra Mangleate 6" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                </div>
+                <div class="aspect-video rounded-2xl overflow-hidden shadow-md group">
+                    <img src="https://i.postimg.cc/HWM9zpFJ/5bb743b7-15ce-4b81-91fb-0ed09c059005.jpg" alt="Muestra Mangleate 7" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                </div>
+                <div class="aspect-video rounded-2xl overflow-hidden shadow-md group">
+                    <img src="https://i.postimg.cc/jqf4csBL/72a08c80-1580-4c33-b0ff-02546f205413.jpg" alt="Muestra Mangleate 8" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                </div>
+                <div class="aspect-video rounded-2xl overflow-hidden shadow-md group">
+                    <img src="https://i.postimg.cc/kMSvsnL2/bb3d3615-ab9f-4d9c-8d4f-11d9d7bcfe2e.jpg" alt="Muestra Mangleate 9" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contacto / Únete Section -->
+    <section id="contacto" class="py-24 bg-white border-t border-sand-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-emerald-950 text-white rounded-3xl overflow-hidden shadow-2xl border border-mint-500/30 grid grid-cols-1 lg:grid-cols-2">
+                
+                <div class="p-8 sm:p-14 flex flex-col justify-between space-y-8">
+                    <div class="space-y-4">
+                        <span class="text-mint-400 font-bold text-xs tracking-widest uppercase inline-block bg-mint-500/10 px-3 py-1 rounded-full border border-mint-500/20">
+                            Conéctate con Nosotros
+                        </span>
+                        <h2 class="font-display text-3xl sm:text-4xl text-sand-50 leading-tight">
+                            ¿QUIERES SUMARTE O SABER MÁS?
+                        </h2>
+                        <p class="text-sand-200 text-base font-medium leading-relaxed">
+                            Escríbenos para participar en nuestras próximas jornadas de voluntariado ambiental en Villa Gloria o síguenos en redes sociales para estar al tanto de todo.
+                        </p>
+                    </div>
+
+                    <div class="space-y-5 text-sm text-sand-100">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 rounded-full bg-mint-500/20 text-mint-400 flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="instagram" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <span class="block text-xs font-bold text-sand-300 uppercase tracking-wider">Instagram Oficial</span>
+                                <a href="https://www.instagram.com/mangleate" target="_blank" class="text-mint-400 text-lg font-bold underline">@mangleate</a>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 rounded-full bg-mint-500/20 text-mint-400 flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="mail" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <span class="block text-xs font-bold text-sand-300 uppercase tracking-wider">Correo Electrónico</span>
+                                <a href="mailto:mangleate@gmail.com" class="text-sand-100 text-lg font-bold hover:text-mint-400">mangleate@gmail.com</a>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 rounded-full bg-mint-500/20 text-mint-400 flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="map-pin" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <span class="block text-xs font-bold text-sand-300 uppercase tracking-wider">Ubicación</span>
+                                <span class="text-sand-100 text-base font-semibold">Villa Gloria, La Boquilla, Cartagena de Indias</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pt-4 flex flex-wrap gap-3">
+                        <a href="https://www.instagram.com/mangleate" target="_blank" class="bg-white/10 hover:bg-white/20 border border-white/20 text-sand-100 px-6 py-3.5 rounded-xl font-bold text-sm flex items-center space-x-2 transition-all">
+                            <i data-lucide="instagram" class="w-5 h-5 text-mint-400"></i>
+                            <span>Ir a Instagram</span>
+                        </a>
+                        <a href="mailto:mangleate@gmail.com" class="bg-mint-500 hover:bg-mint-600 text-emerald-950 px-6 py-3.5 rounded-xl font-bold text-sm flex items-center space-x-2 transition-all shadow-lg">
+                            <i data-lucide="mail" class="w-5 h-5"></i>
+                            <span>Enviar Correo</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="bg-sand-50 p-8 sm:p-14 flex flex-col justify-center text-slate-800 rounded-r-3xl">
+                    <h3 class="font-display text-2xl text-emerald-950 mb-8">ENVÍANOS UN MENSAJE</h3>
+                    <form onsubmit="handleContactSubmit(event)" class="space-y-5">
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-2">Nombre Completo</label>
+                            <input type="text" id="contact-name" required placeholder="Tu nombre" class="w-full bg-white border border-sand-200 rounded-xl px-5 py-3.5 font-medium text-sm focus:outline-none focus:border-mint-500 focus:ring-2 focus:ring-mint-500/20">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-2">Correo Electrónico</label>
+                            <input type="email" id="contact-info" required placeholder="tu-correo@mail.com" class="w-full bg-white border border-sand-200 rounded-xl px-5 py-3.5 font-medium text-sm focus:outline-none focus:border-mint-500 focus:ring-2 focus:ring-mint-500/20">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-2">Mensaje</label>
+                            <textarea id="contact-msg" rows="4" required placeholder="¿Cómo te gustaría unirte o colaborar?" class="w-full bg-white border border-sand-200 rounded-xl px-5 py-3.5 font-medium text-sm focus:outline-none focus:border-mint-500 focus:ring-2 focus:ring-mint-500/20"></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-emerald-950 hover:bg-emerald-900 text-sand-100 font-bold text-base py-4 rounded-xl transition-all shadow-lg flex items-center justify-center space-x-2">
+                            <span>Enviar Mensaje</span>
+                            <i data-lucide="arrow-right" class="w-5 h-5 text-mint-400"></i>
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-emerald-950 text-sand-100 pt-16 pb-12 border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 pb-12 border-b border-white/10">
+                <div class="space-y-5">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 rounded-full bg-mint-500 overflow-hidden flex items-center justify-center border border-mint-400/40 flex-shrink-0">
+                            <img src="https://i.postimg.cc/gJ6q147F/bf13585b-13f2-4156-8b49-ca277ab260ee.jpg" alt="Logo Mangléate" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <span class="font-display text-xl tracking-wider text-sand-100">MANGLÉATE</span>
+                            <span class="block text-[11px] tracking-widest text-mint-400 uppercase font-semibold">Voluntariado Ambiental</span>
+                        </div>
+                    </div>
+                    <p class="text-sm font-medium text-sand-300 leading-relaxed">
+                        Iniciativa juvenil de gestión comunitaria de residuos sólidos y revalorización ambiental en Villa Gloria, Cartagena.
+                    </p>
+                </div>
+
+                <div class="space-y-5">
+                    <h4 class="font-display text-lg text-mint-400">ENLACES RÁPIDOS</h4>
+                    <ul class="space-y-3 text-sm font-medium text-sand-300">
+                        <li><a href="#inicio" class="hover:text-mint-400 transition-colors">Inicio</a></li>
+                        <li><a href="#quienes-somos" class="hover:text-mint-400 transition-colors">¿Quiénes Somos?</a></li>
+                        <li><a href="#que-hacemos" class="hover:text-mint-400 transition-colors">¿Qué Hacemos?</a></li>
+                        <li><a href="#actividades" class="hover:text-mint-400 transition-colors">Encuentros</a></li>
+                        <li><a href="#galeria" class="hover:text-mint-400 transition-colors">Galería</a></li>
+                        <li><a href="#contacto" class="hover:text-mint-400 transition-colors">Contacto</a></li>
+                    </ul>
+                </div>
+
+                <div class="space-y-5">
+                    <h4 class="font-display text-lg text-mint-400">REDES & SOCIAL</h4>
+                    <ul class="space-y-4 text-sm font-medium text-sand-300">
+                        <li class="flex items-center space-x-3">
+                            <i data-lucide="instagram" class="w-5 h-5 text-mint-400 flex-shrink-0"></i>
+                            <span>Instagram: <a href="https://www.instagram.com/mangleate" target="_blank" class="text-mint-400 underline font-bold">@mangleate</a></span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <i data-lucide="map-pin" class="w-5 h-5 text-mint-400 flex-shrink-0"></i>
+                            <span>Villa Gloria, La Boquilla, Cartagena de Indias</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs font-semibold text-sand-400 space-y-4 sm:space-y-0">
+                <p>&copy; 2026 Mangléate. Todos los derechos reservados. Impulsado por S2cities, Fundación Mi Sangre y Es Tu City.</p>
+                <div class="flex space-x-6">
+                    <a href="https://www.instagram.com/mangleate" target="_blank" class="hover:text-mint-400 transition-colors">Instagram @mangleate</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Contact Form Submit Handler
+        function handleContactSubmit(event) {
+            event.preventDefault();
+            const name = document.getElementById('contact-name').value;
+            
+            showToast('¡Mensaje Enviado!', `Gracias ${name}, hemos recibido tu mensaje y te contactaremos pronto.`);
+            event.target.reset();
+        }
+
+        // Toast Notification Helper
+        function showToast(title, desc) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-title').innerText = title;
+            document.getElementById('toast-desc').innerText = desc;
+            
+            toast.classList.remove('translate-y-32', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-32', 'opacity-0');
+            }, 4000);
+        }
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        function closeMobileMenu() {
+            mobileMenu.classList.add('hidden');
+        }
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 0) {
+                navbar.classList.add('bg-emerald-950', 'shadow-xl', 'py-2');
+                navbar.classList.remove('bg-emerald-950/90', 'h-20');
+            } else {
+                navbar.classList.remove('shadow-xl', 'py-2');
+                navbar.classList.add('bg-emerald-950/90', 'h-20');
+            }
+        });
+    </script>
+</body>
+</html>
